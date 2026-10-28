@@ -16,6 +16,10 @@ jobs:
   cask:
     runs-on: macos-15
     timeout-minutes: 30
+    # Homebrew asks GitHub's API about the release; shared runners without a token share 60 requests
+    # an hour and run out. The workflow's own token, read-only (permissions above), is enough.
+    env:
+      HOMEBREW_GITHUB_API_TOKEN: ${{ github.token }}
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
