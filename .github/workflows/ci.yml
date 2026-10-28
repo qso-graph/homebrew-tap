@@ -26,9 +26,14 @@ jobs:
           tap="$(brew --repository)/Library/Taps/qso-graph/homebrew-tap"
           mkdir -p "$(dirname "$tap")"
           ln -s "$GITHUB_WORKSPACE" "$tap"
+      # Homebrew ignores an untrusted tap's casks (https://docs.brew.sh/Tap-Trust): trust this one
+      # cask, not the whole tap, as its docs advise for automation. A user's fully qualified
+      # `brew install qso-graph/tap/qso-graph-desktop` trusts it the same way.
+      - name: This cask trusted
+        run: brew trust --cask qso-graph/tap/qso-graph-desktop
       - name: Homebrew's own checks
         run: |
-          brew style qso-graph/tap
+          brew style qso-graph/tap/qso-graph-desktop
           brew audit --cask --strict --online qso-graph/tap/qso-graph-desktop
       - name: Installs, is notarized, and uninstalls
         run: |

@@ -18,7 +18,7 @@ cask "qso-graph-desktop" do
   # The application updates itself; brew upgrade and its updater don't fight.
   auto_updates true
   depends_on arch: :arm64
-  depends_on macos: ">= :ventura"
+  depends_on macos: :ventura
 
   app "QSO Graph Desktop.app"
 
