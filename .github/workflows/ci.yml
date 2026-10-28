@@ -1,0 +1,62 @@
+# SPDX-License-Identifier: GPL-3.0-or-later
+# The cask is checked as Homebrew checks it, then installed and removed on a real Mac: the download,
+# its SHA-256, the app it holds, and that it is notarized.
+name: ci
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  cask:
+    runs-on: macos-15
+    timeout-minutes: 30
+    # Homebrew asks GitHub's API about the release; shared runners without a token share 60 requests
+    # an hour and run out. The workflow's own token, read-only (permissions above), is enough.
+    env:
+      HOMEBREW_GITHUB_API_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Tapped from this checkout
+        run: |
+          set -euo pipefail
+          tap="$(brew --repository)/Library/Taps/qso-graph/homebrew-tap"
+          mkdir -p "$(dirname "$tap")"
+          ln -s "$GITHUB_WORKSPACE" "$tap"
+      # Homebrew ignores an untrusted tap's casks (https://docs.brew.sh/Tap-Trust): trust this one
+      # cask, not the whole tap, as its docs advise for automation. A user's fully qualified
+      # `brew install qso-graph/tap/qso-graph-desktop` trusts it the same way.
+      - name: This cask trusted
+        run: brew trust --cask qso-graph/tap/qso-graph-desktop
+      - name: Homebrew's own checks
+        run: |
+          brew style qso-graph/tap/qso-graph-desktop
+          brew audit --cask --strict --online qso-graph/tap/qso-graph-desktop
+      - name: Installs, is notarized, and uninstalls
+        run: |
+          set -euo pipefail
+          brew install --cask qso-graph/tap/qso-graph-desktop
+          spctl -a -vv "/Applications/QSO Graph Desktop.app" 2>&1 | tee /dev/stderr | grep -q 'source=Notarized Developer ID'
+          brew uninstall --cask qso-graph-desktop
+          test ! -e "/Applications/QSO Graph Desktop.app"
+
+  # The one check main's ruleset requires, as in every qso-graph repository.
+  ci-all-green:
+    name: ci-all-green
+    needs: [cask]
+    runs-on: ubuntu-latest
+    if: always()
+    steps:
+      - name: Every job passed
+        env:
+          CASK: ${{ needs.cask.result }}
+        run: |
+          if [ "$CASK" != success ]; then echo "FAIL: the cask did not install and check (result=$CASK)"; exit 1; fi
+          echo "All green."

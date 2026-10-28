@@ -1,0 +1,15 @@
+# Dependabot: security updates only, grouped into one pull request, as in every qso-graph repository
+# (see wspr-mcp's for why). This tap's dependencies are the GitHub Actions its CI pins by SHA.
+version: 2
+updates:
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+    open-pull-requests-limit: 0
+    groups:
+      security:
+        applies-to: security-updates
+        patterns:
+          - "*"
