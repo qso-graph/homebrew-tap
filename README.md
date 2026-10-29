@@ -6,7 +6,7 @@ QSO Graph's apps for macOS, installed with [Homebrew](https://brew.sh). It carri
 
 | App | What it is |
 |---|---|
-| **QSO Graph Desktop** | Amateur radio desktop: callsigns, Locations, POTA, SOTA and ADIF. Apple silicon, macOS 13 or later. |
+| **QSO Graph Desktop** | Amateur radio desktop: callsigns and their logins, Locations, Parks On the Air, band conditions, sun and moon, and ADIF Lookup. Apple silicon, macOS 13 or later. |
 
 ## Install
 
@@ -17,7 +17,14 @@ brew install qso-graph/tap/qso-graph-desktop
 ```
 
 Each one installs the same signed, notarized download as its GitHub Releases page, checked against its
-SHA-256. QSO Graph Desktop updates itself, and `brew upgrade` brings each new Stable release too.
+SHA-256. QSO Graph Desktop updates itself. To have Homebrew move it to a new Stable release, name it:
+
+```bash
+brew upgrade qso-graph-desktop
+```
+
+A plain `brew upgrade` skips it, because Homebrew leaves apps that update themselves alone unless you
+add `--greedy`.
 
 ## See what's here
 
