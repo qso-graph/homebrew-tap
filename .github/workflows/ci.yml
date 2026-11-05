@@ -1,6 +1,7 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 # The cask is checked as Homebrew checks it, then installed and removed on a real Mac: the download,
-# its SHA-256, the app it holds, and that it is notarized.
+# its SHA-256, the app it holds, and that it is notarized. QG Trust's formula the same way: the
+# program runs, and is signed with QSO Graph's Developer ID.
 name: ci
 
 on:
@@ -47,16 +48,60 @@ jobs:
           brew uninstall --cask qso-graph-desktop
           test ! -e "/Applications/QSO Graph Desktop.app"
 
+  formula:
+    runs-on: macos-15
+    timeout-minutes: 30
+    env:
+      HOMEBREW_GITHUB_API_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      # The formula is written by the first QG Trust Release; until then there is nothing to check.
+      - name: The formula is here
+        id: here
+        run: |
+          if [ -f Formula/qso-graph-trust.rb ]; then echo "here=true" >> "$GITHUB_OUTPUT"; else echo "No formula yet."; fi
+      - name: Tapped from this checkout
+        if: steps.here.outputs.here == 'true'
+        run: |
+          set -euo pipefail
+          tap="$(brew --repository)/Library/Taps/qso-graph/homebrew-tap"
+          mkdir -p "$(dirname "$tap")"
+          ln -s "$GITHUB_WORKSPACE" "$tap"
+      - name: This formula trusted
+        if: steps.here.outputs.here == 'true'
+        run: brew trust --formula qso-graph/tap/qso-graph-trust
+      - name: Homebrew's own checks
+        if: steps.here.outputs.here == 'true'
+        run: |
+          brew style qso-graph/tap/qso-graph-trust
+          brew audit --formula --strict --online qso-graph/tap/qso-graph-trust
+      - name: Installs, runs, is signed, and uninstalls
+        if: steps.here.outputs.here == 'true'
+        run: |
+          set -euo pipefail
+          brew install --formula qso-graph/tap/qso-graph-trust
+          brew test qso-graph/tap/qso-graph-trust
+          exe="$(brew --prefix)/bin/qg-trust"
+          codesign --verify --strict --verbose=2 "$exe"
+          codesign -dv --verbose=2 "$exe" 2>&1 | tee /dev/stderr | grep -q '^Authority=Developer ID Application: '
+          test -f "$(brew --prefix)/share/zsh/site-functions/_qg-trust"
+          brew uninstall --formula qso-graph-trust
+          test ! -e "$exe"
+
   # The one check main's ruleset requires, as in every qso-graph repository.
   ci-all-green:
     name: ci-all-green
-    needs: [cask]
+    needs: [cask, formula]
     runs-on: ubuntu-latest
     if: always()
     steps:
       - name: Every job passed
         env:
           CASK: ${{ needs.cask.result }}
+          FORMULA: ${{ needs.formula.result }}
         run: |
           if [ "$CASK" != success ]; then echo "FAIL: the cask did not install and check (result=$CASK)"; exit 1; fi
+          if [ "$FORMULA" != success ]; then echo "FAIL: the formula did not install and check (result=$FORMULA)"; exit 1; fi
           echo "All green."

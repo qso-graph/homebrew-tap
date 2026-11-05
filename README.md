@@ -48,7 +48,7 @@ passwords stay in your Keychain until you remove them there.
 
 ## How it's kept up to date
 
-When a release is made Stable, QSO Graph's release tools (`qg-release-promote`) open a pull request here
+When a Release is published, QSO Graph's release tools (`qg-tap-bump`) open a pull request here
 with the new version and its SHA-256. This repository's CI installs it on a Mac, checks that Apple
 notarized it, and uninstalls it, and the pull request merges only when that passes.
 
