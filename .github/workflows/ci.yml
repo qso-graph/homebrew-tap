@@ -44,7 +44,9 @@ jobs:
         run: |
           set -euo pipefail
           brew install --cask qso-graph/tap/qso-graph-desktop
-          spctl -a -vv "/Applications/QSO Graph Desktop.app" 2>&1 | tee /dev/stderr | grep -q 'source=Notarized Developer ID'
+          assessed="$(spctl -a -vv "/Applications/QSO Graph Desktop.app" 2>&1)"
+          printf '%s\n' "$assessed"
+          grep -q 'source=Notarized Developer ID' <<< "$assessed"
           brew uninstall --cask qso-graph-desktop
           test ! -e "/Applications/QSO Graph Desktop.app"
 
@@ -85,7 +87,11 @@ jobs:
           brew test qso-graph/tap/qso-graph-trust
           exe="$(brew --prefix)/bin/qg-trust"
           codesign --verify --strict --verbose=2 "$exe"
-          codesign -dv --verbose=2 "$exe" 2>&1 | tee /dev/stderr | grep -q '^Authority=Developer ID Application: '
+          # Read whole, then searched: grep -q in a pipe stops reading at the match, and under pipefail the
+          # writer's broken pipe fails the step.
+          signed="$(codesign -dv --verbose=2 "$exe" 2>&1)"
+          printf '%s\n' "$signed"
+          grep -q '^Authority=Developer ID Application: ' <<< "$signed"
           test -f "$(brew --prefix)/share/zsh/site-functions/_qg-trust"
           brew uninstall --formula qso-graph-trust
           test ! -e "$exe"
