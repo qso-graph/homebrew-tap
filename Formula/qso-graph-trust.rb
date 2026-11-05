@@ -6,10 +6,18 @@ class QsoGraphTrust < Formula
   homepage "https://github.com/qso-graph/qso-graph-trust"
   license "GPL-3.0-only"
 
+  livecheck do
+    url :stable
+    strategy :github_latest
+  end
+
+  # Homebrew takes a url only inside on_arm or on_intel, never directly in on_macos (brew style).
   on_macos do
     depends_on arch: :arm64
-    url "https://github.com/qso-graph/qso-graph-trust/releases/download/v0.1.0/qg-trust-0.1.0-macos-arm64.tar.gz"
-    sha256 "33f2942d2fa5346003b1b936f501890c53b810156d46b83f6fc71482aa5ab7fb"
+    on_arm do
+      url "https://github.com/qso-graph/qso-graph-trust/releases/download/v0.1.0/qg-trust-0.1.0-macos-arm64.tar.gz"
+      sha256 "33f2942d2fa5346003b1b936f501890c53b810156d46b83f6fc71482aa5ab7fb"
+    end
   end
   on_linux do
     on_intel do
@@ -20,11 +28,6 @@ class QsoGraphTrust < Formula
       url "https://github.com/qso-graph/qso-graph-trust/releases/download/v0.1.0/qg-trust-0.1.0-linux-arm64.tar.gz"
       sha256 "6147c4079122be82d7241c36aa5837ec445055f22f65830755ea69f33abe6949"
     end
-  end
-
-  livecheck do
-    url :stable
-    strategy :github_latest
   end
 
   def install
