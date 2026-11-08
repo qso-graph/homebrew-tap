@@ -15,18 +15,18 @@ class QsoGraphTrust < Formula
   on_macos do
     depends_on arch: :arm64
     on_arm do
-      url "https://github.com/qso-graph/qso-graph-trust/releases/download/v0.1.4/qg-trust-0.1.4-macos-arm64.tar.gz"
-      sha256 "272c6fb8ec59f7031a95d6a5014fdbe9c4c19ad7432070c239624a6278fee801"
+      url "https://github.com/qso-graph/qso-graph-trust/releases/download/v0.1.5/qg-trust-0.1.5-macos-arm64.tar.gz"
+      sha256 "ee426e412aa03fd477df35888fbe549785d206232fa47cad0de03f91c9e48d29"
     end
   end
   on_linux do
     on_intel do
-      url "https://github.com/qso-graph/qso-graph-trust/releases/download/v0.1.4/qg-trust-0.1.4-linux-x86_64.tar.gz"
-      sha256 "55f75cdeb3b5d807094720726c95f492e9de578698371814121c757a01a1d523"
+      url "https://github.com/qso-graph/qso-graph-trust/releases/download/v0.1.5/qg-trust-0.1.5-linux-x86_64.tar.gz"
+      sha256 "04b6a533d487fe0aeb0bbfc7de5381a2ac787bf2941abad8088d4740806b1b79"
     end
     on_arm do
-      url "https://github.com/qso-graph/qso-graph-trust/releases/download/v0.1.4/qg-trust-0.1.4-linux-arm64.tar.gz"
-      sha256 "d5d3afdd19a79b46d298f2d70fb7288d98e153a82d05a1cf6b4077d5de6218c2"
+      url "https://github.com/qso-graph/qso-graph-trust/releases/download/v0.1.5/qg-trust-0.1.5-linux-arm64.tar.gz"
+      sha256 "88796029a0790300c2e394500888e73968c8fd04ec04d04730305cbed8b754fe"
     end
   end
 
