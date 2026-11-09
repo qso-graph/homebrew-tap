@@ -4,7 +4,7 @@
 class QsoGraphTrust < Formula
   desc "Sign and upload logs to LoTW, with the key in the OS credential store"
   homepage "https://github.com/qso-graph/qso-graph-trust"
-  license "GPL-3.0-only"
+  license "GPL-3.0-or-later"
 
   livecheck do
     url :stable
