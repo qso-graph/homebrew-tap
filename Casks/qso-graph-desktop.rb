@@ -1,9 +1,9 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 # QSO Graph Desktop, from its GitHub release: the signed, notarized Apple silicon .dmg.
-# Rewritten whole when a Release is published, so a change made here does not last.
+# Written by qg-tap-bump (qso-graph-devel shell/qg_functions) when a Release is published.
 cask "qso-graph-desktop" do
-  version "0.7.0"
-  sha256 "16d6c9bb7ccc9d9f7b46812e3b1ffaf6337f03f30090d4a86e179f04997e128d"
+  version "0.7.1"
+  sha256 "7ea74ef3e70bcbcffdb64b5ebc29d945562bd08f167997f3028dd22c13e299b0"
 
   url "https://github.com/qso-graph/qso-graph-desktop/releases/download/v#{version}/qso-graph-desktop-#{version}-mac-arm64.dmg"
   name "QSO Graph Desktop"
