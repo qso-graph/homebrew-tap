@@ -2,8 +2,8 @@
 # QSO Graph Desktop, from its GitHub release: the signed, notarized Apple silicon .dmg.
 # Rewritten whole when a Release is published, so a change made here does not last.
 cask "qso-graph-desktop" do
-  version "0.6.0"
-  sha256 "e1562abc5fb76dcaac4c6004cd33bca6dd321425bd8b15a14fc0bcb1ac61fcb9"
+  version "0.7.0"
+  sha256 "16d6c9bb7ccc9d9f7b46812e3b1ffaf6337f03f30090d4a86e179f04997e128d"
 
   url "https://github.com/qso-graph/qso-graph-desktop/releases/download/v#{version}/qso-graph-desktop-#{version}-mac-arm64.dmg"
   name "QSO Graph Desktop"
