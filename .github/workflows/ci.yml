@@ -5,9 +5,10 @@
 name: ci
 
 on:
+  # The pull request's run is the one check of a change. Merging re-runs nothing: main holds
+  # exactly what that run checked, and a second run on main only waits for a Mac to re-prove it.
+  # workflow_dispatch checks main by hand, for example after a release asset changes.
   pull_request:
-  push:
-    branches: [main]
   workflow_dispatch:
 
 permissions:
