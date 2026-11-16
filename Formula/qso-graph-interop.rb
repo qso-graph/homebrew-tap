@@ -15,18 +15,18 @@ class QsoGraphInterop < Formula
   on_macos do
     depends_on arch: :arm64
     on_arm do
-      url "https://github.com/qso-graph/qso-graph-interop/releases/download/v0.1.0/qg-interop-0.1.0-macos-arm64.tar.gz"
-      sha256 "46c30bd85b4599e5a0f364e1b6242467f8f8be7062872fd81c6c473958d516ca"
+      url "https://github.com/qso-graph/qso-graph-interop/releases/download/v0.2.0/qg-interop-0.2.0-macos-arm64.tar.gz"
+      sha256 "4964a0ba5e85c21b5b9fc4ad01d478fbb4be33b5da550d6e4feeb604c2131bc6"
     end
   end
   on_linux do
     on_intel do
-      url "https://github.com/qso-graph/qso-graph-interop/releases/download/v0.1.0/qg-interop-0.1.0-linux-x86_64.tar.gz"
-      sha256 "c7038470511b94478aa4ab1c3353f05f3e9569838c037383b31cc4323352d14e"
+      url "https://github.com/qso-graph/qso-graph-interop/releases/download/v0.2.0/qg-interop-0.2.0-linux-x86_64.tar.gz"
+      sha256 "d35540b4fbaa32ecac8ea80a0edce7aef8d432946aba3e5ec87484e3c58cd8b2"
     end
     on_arm do
-      url "https://github.com/qso-graph/qso-graph-interop/releases/download/v0.1.0/qg-interop-0.1.0-linux-arm64.tar.gz"
-      sha256 "bbd2b30363e4d9931c6db55ba55b914807556502c623143a41c718c177fbdcd3"
+      url "https://github.com/qso-graph/qso-graph-interop/releases/download/v0.2.0/qg-interop-0.2.0-linux-arm64.tar.gz"
+      sha256 "bcd5e8ac9fda4875bcdb29c15b768e8f6414141fcaf0843ecbba3a95ad36cb0d"
     end
   end
 
