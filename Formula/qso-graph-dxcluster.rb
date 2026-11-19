@@ -15,18 +15,18 @@ class QsoGraphDxcluster < Formula
   on_macos do
     depends_on arch: :arm64
     on_arm do
-      url "https://github.com/qso-graph/qso-graph-dxcluster/releases/download/v0.1.1/qg-dxc-0.1.1-macos-arm64.tar.gz"
-      sha256 "3fc8f5cf3bc02d640dec6873281b8b84064a8eb6f3f43490ca653961fc548b10"
+      url "https://github.com/qso-graph/qso-graph-dxcluster/releases/download/v0.1.2/qg-dxc-0.1.2-macos-arm64.tar.gz"
+      sha256 "fb323ed7769b0271db97c025c6e4000d185baafb97fd6b8796f0967052bc61ed"
     end
   end
   on_linux do
     on_intel do
-      url "https://github.com/qso-graph/qso-graph-dxcluster/releases/download/v0.1.1/qg-dxc-0.1.1-linux-x86_64.tar.gz"
-      sha256 "6d53a69be59d83c4a45de2ddd721c0748be9ee7925179521f86ac9603c49c45d"
+      url "https://github.com/qso-graph/qso-graph-dxcluster/releases/download/v0.1.2/qg-dxc-0.1.2-linux-x86_64.tar.gz"
+      sha256 "49c87730935b6002f188e35fd7254e74b2da242c8854bd9ec96de4d326204ca0"
     end
     on_arm do
-      url "https://github.com/qso-graph/qso-graph-dxcluster/releases/download/v0.1.1/qg-dxc-0.1.1-linux-arm64.tar.gz"
-      sha256 "85a07ea5e7b1e8c053defac3a6dc3d2f6d31414714fab6c70b2cbaa16ce2e30c"
+      url "https://github.com/qso-graph/qso-graph-dxcluster/releases/download/v0.1.2/qg-dxc-0.1.2-linux-arm64.tar.gz"
+      sha256 "05ffe3f36efcf52b5d992f614d9e482b277cb2bd3e143c3b5a70d2c885566f60"
     end
   end
 
