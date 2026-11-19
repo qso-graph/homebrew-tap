@@ -9,6 +9,7 @@ QSO Graph's apps for macOS, installed with [Homebrew](https://brew.sh). It carri
 | **QSO Graph Desktop** | Amateur radio desktop: callsigns and their logins, Locations, Parks On the Air, band conditions, sun and moon, and ADIF Lookup. Apple silicon, macOS 13 or later. |
 | **QSO Graph Trust** | `qg-trust`: sign and upload your logs to ARRL's Logbook of The World, with your key in your computer's credential store. Works where `tqsl` does, from your logger or the command line. macOS on Apple silicon, and Linux. |
 | **QG Interop** | `qg-interop`: listen to, decode and simulate WSJT-X, N1MM Logger+ and fldigi messages, as one JSON event per line. macOS on Apple silicon, and Linux. |
+| **QG DX Cluster** | `qg-dxc`: watch DX cluster and Reverse Beacon Network spots from several nodes in one live, filterable terminal list. macOS on Apple silicon, and Linux. |
 
 ## Install
 
@@ -30,6 +31,12 @@ QG Interop:
 brew install qso-graph/tap/qso-graph-interop
 ```
 
+QG DX Cluster:
+
+```bash
+brew install qso-graph/tap/qso-graph-dxcluster
+```
+
 Each one installs the same signed, notarized download as its GitHub Releases page, checked against its
 SHA-256. QSO Graph Desktop updates itself. To have Homebrew move it to a new Stable release, name it:
 
@@ -38,7 +45,7 @@ brew upgrade qso-graph-desktop
 ```
 
 A plain `brew upgrade` skips it, because Homebrew leaves apps that update themselves alone unless you
-add `--greedy`. QSO Graph Trust and QG Interop move to a new Stable release with every `brew upgrade`.
+add `--greedy`. QSO Graph Trust, QG Interop and QG DX Cluster move to a new Stable release with every `brew upgrade`.
 
 ## See what's here
 
