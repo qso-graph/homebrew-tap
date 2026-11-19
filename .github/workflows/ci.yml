@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 # The cask is checked as Homebrew checks it, then installed and removed on a real Mac: the download,
 # its SHA-256, the app it holds, and that it is notarized. QG Trust's formula the same way: the
-# program runs, and is signed with QSO Graph's Developer ID; QG Interop's formula likewise.
+# program runs, and is signed with QSO Graph's Developer ID; QG Interop's and QG DX Cluster's formulas likewise.
 name: ci
 
 on:
@@ -59,6 +59,7 @@ jobs:
         include:
           - { formula: qso-graph-trust, exe: qg-trust, completions: true }
           - { formula: qso-graph-interop, exe: qg-interop, completions: false }
+          - { formula: qso-graph-dxcluster, exe: qg-dxc, completions: false }
     runs-on: macos-15
     timeout-minutes: 30
     env:
